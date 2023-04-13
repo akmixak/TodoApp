@@ -8,7 +8,7 @@ const TodoItem = ({ item, dispatchForList }) => {
       <p>Priority: {item.priority}</p>
       <p>taskDesc: {item.taskDesc}</p>
       <button onClick={() => dispatchForList({ id: item.id, type: "delete" })}>
-        Remove Task
+        Remove
       </button>
       {item.status !== "completed" ? (
         item.status === "started" ? (
@@ -33,7 +33,7 @@ const TodoItem = ({ item, dispatchForList }) => {
               })
             }
           >
-            Start Task
+            Start
           </button>
         )
       ) : null}

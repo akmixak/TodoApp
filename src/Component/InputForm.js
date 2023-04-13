@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import styles from "./InputForm.module.css";
 function taskInputReducer(task, action) {
   if (action.type === "title") {
     //console.log(action, task)
@@ -125,13 +125,12 @@ const InputForm = ({ dispatchForList }) => {
           value={taskDesc}
           onChange={onChangeTaskDesc}
         ></textarea>
-        <div className="form-control">
+        <div className={styles.form_control}>
           <button type="submit" value="Submit">
             Add task
           </button>
           <button type="reset" value="Reset">
-            {" "}
-            Reset{" "}
+            Reset
           </button>
         </div>
       </fieldset>

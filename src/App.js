@@ -52,10 +52,19 @@ function App() {
   return (
     <div className="App">
       <InputForm dispatchForList={dispatchForList} />
-      <div style={{ display: "flex" }}>
-        <TodoList list={todoList} dispatchForList={dispatchForList} />
-        <TodoList list={activeTaskList} dispatchForList={dispatchForList} />
-        <TodoList list={completedTaskList} dispatchForList={dispatchForList} />
+      <div className="all-lists">
+        {todoList.length ? (
+          <TodoList list={todoList} dispatchForList={dispatchForList} />
+        ) : null}
+        {activeTaskList.length ? (
+          <TodoList list={activeTaskList} dispatchForList={dispatchForList} />
+        ) : null}
+        {completedTaskList.length ? (
+          <TodoList
+            list={completedTaskList}
+            dispatchForList={dispatchForList}
+          />
+        ) : null}
       </div>
     </div>
   );

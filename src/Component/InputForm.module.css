@@ -1,0 +1,31 @@
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgb(227, 233, 233);
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+form {
+  width: 30%;
+  margin: auto;
+}
+.form_control {
+  display: flex;
+  justify-content: space-between;
+}
+button[type="submit"],
+button[type="reset"] {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 16px;
+}

@@ -1,0 +1,5 @@
+.all-lists {
+  display: flex;
+  background-color: aliceblue;
+  justify-content: space-between;
+}
