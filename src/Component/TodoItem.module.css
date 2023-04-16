@@ -4,3 +4,8 @@ li {
   border: 1px solid;
   overflow: auto;
 }
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+}

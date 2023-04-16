@@ -1,129 +1,98 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import styles from "./InputForm.module.css";
-function taskInputReducer(task, action) {
-  if (action.type === "title") {
-    //console.log(action, task)
-    return {
-      ...task,
-      title: action.title,
-    };
-  }
-  if (action.type === "priority") {
-    return {
-      ...task,
-      priority: action.priority,
-    };
-  }
-  if (action.type === "dueDate") {
-    return {
-      ...task,
-      dueDate: action.dueDate,
-    };
-  }
-  if (action.type === "taskDesc") {
-    return {
-      ...task,
-      taskDesc: action.taskDesc,
-    };
-  }
-  if (action.type === "reset") {
-    return {
-      id: Date.now(),
-      title: "",
-      dueDate: "",
-      priority: "none",
-      taskDesc: "",
-      status: "todo",
-    };
-  }
-}
 
+function useColors() {
+  const [colors, setColors] = useState([]);
+  useEffect(() => {
+    const getColors = async () => {
+      let controller = new AbortController();
+      const resp = await fetch(
+        "https://api.sampleapis.com/csscolornames/colors",
+        {
+          signal: controller.signal,
+        }
+      );
+      const json = await resp.json();
+
+      setColors(json);
+      return () => controller.abort();
+    };
+    getColors();
+  }, []);
+  return colors;
+}
 const InputForm = ({ dispatchForList }) => {
-  const [taskInput, dispatch] = React.useReducer(taskInputReducer, {
+  const DEFAULT_VALUE = {
     id: Date.now(),
     title: "",
     dueDate: "",
     priority: "none",
     taskDesc: "",
     status: "todo",
-  });
-  const { title, dueDate, priority, taskDesc } = taskInput;
-  //console.log(title, dueDate, priority, taskDesc);
-  function onChangeTitle(event) {
-    //console.log(title)
-    dispatch({
-      type: "title",
-      title: event.target.value,
-    });
-  }
-  function onChangeDueDate(event) {
-    //console.log(event.target.value)
-    dispatch({
-      type: "dueDate",
-      dueDate: event.target.value,
-    });
-  }
-  function onChangePriority(event) {
-    //console.log(event.target.value)
-    dispatch({
-      type: "priority",
-      priority: event.target.value,
-    });
-  }
-  function onChangeTaskDesc(event) {
-    dispatch({
-      type: "taskDesc",
-      taskDesc: event.target.value,
-    });
-  }
+    color: "",
+  };
+  const [taskInput, setTaskInput] = React.useState(DEFAULT_VALUE);
+  const { title, dueDate, priority, taskDesc, color } = taskInput;
+  const colors = useColors();
+
   function submitHandler(e) {
     e.preventDefault();
-    //console.log(taskInput)
     dispatchForList({
       type: "add",
       item: taskInput,
     });
     console.log(e.target);
-    dispatch({ type: "reset" });
+    setTaskInput(DEFAULT_VALUE);
+  }
+
+  function onChange(event) {
+    setTaskInput({ ...taskInput, [event.target.id]: event.target.value });
   }
 
   return (
     <form id="todo" onSubmit={submitHandler}>
       <fieldset>
         <legend align="center"> Add task </legend>
-        <label htmlFor="task-title">Enter the task:</label>
+        <label htmlFor="title">Enter the task:</label>
         <input
           type="text"
-          id="task-title"
+          id="title"
           value={title}
-          onChange={onChangeTitle}
+          onChange={onChange}
           required
         />
-        <label htmlFor="due-date">Due date:</label>
+        <label htmlFor="dueDate">Due date:</label>
         <input
           type="date"
-          id="due-date"
+          id="dueDate"
           value={dueDate}
-          onChange={onChangeDueDate}
+          onChange={onChange}
           required
         />
-        <label htmlFor="priority-index">Priority:</label>
-        <select
-          id="priority-index"
-          value={priority}
-          onChange={onChangePriority}
-        >
+        <label htmlFor="priority">Priority:</label>
+        <select id="priority" value={priority} onChange={onChange}>
           <option value="none">None</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <label htmlFor="task-decription">Description:</label>
+        <label htmlFor="color">Choose Color</label>
+        <select id="color" value={color} onChange={onChange}>
+          {colors.map((d) => {
+            return (
+              <option value={d.hex} key={d.id}>
+                {d.name}
+              </option>
+            );
+          })}
+        </select>
+        <label htmlFor="taskDesc">Description:</label>
         <textarea
           rows="3"
-          id="task-description"
+          id="taskDesc"
           value={taskDesc}
-          onChange={onChangeTaskDesc}
+          onChange={onChange}
         ></textarea>
         <div className={styles.form_control}>
           <button type="submit" value="Submit">
