@@ -2,4 +2,11 @@
   display: flex;
   background-color: aliceblue;
   justify-content: space-between;
+  padding: 0px 200px;
+  flex: 1;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }

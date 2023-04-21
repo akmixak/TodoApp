@@ -1,3 +1,13 @@
 ul {
   width: 300px;
+  list-style-type: none;
+}
+.sortBy {
+  width: 110px;
+  font-size: 12px;
+}
+.header {
+  display: flex;
+  margin: 20px;
+  justify-content: space-between;
 }

@@ -1,11 +1,41 @@
 li {
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   border: 1px solid;
-  overflow: auto;
+  overflow: scroll;
+  border-radius: 5px;
+  margin-left: -20px;
+  margin-bottom: 10px;
 }
 .btn-group {
+  position: sticky;
+
   display: flex;
   justify-content: space-between;
-  position: sticky;
+  padding: 5px;
+  top: 0;
+}
+button {
+  background-color: DodgerBlue;
+  font-size: 4px;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+button:hover {
+  background-color: RoyalBlue;
+}
+.title {
+  font-size: 17px;
+}
+.otherFields {
+  font-size: 14px;
+}
+.content {
+  padding: 16px;
 }

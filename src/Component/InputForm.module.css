@@ -19,6 +19,10 @@ form {
   display: flex;
   justify-content: space-between;
 }
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 button[type="submit"],
 button[type="reset"] {
   background-color: #4caf50; /* Green */
@@ -28,4 +32,10 @@ button[type="reset"] {
   text-align: center;
   border-radius: 3px;
   font-size: 16px;
+}
+.alert {
+  background-color: #f44336; /* Red */
+  border-radius: 2px;
+  padding: 5px;
+  color: white;
 }
